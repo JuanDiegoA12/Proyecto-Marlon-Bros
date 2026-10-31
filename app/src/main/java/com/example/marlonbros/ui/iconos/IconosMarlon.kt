@@ -56,6 +56,36 @@ object IconosMarlon {
         )
     }
 
+    /** Material "domain" (edificio / departamento). */
+    val Edificio: ImageVector by lazy {
+        icono(
+            nombre = "Edificio",
+            trazo = "M12,7V3H2v18h20V7H12z" +
+                "M6,19H4v-2h2V19zM6,15H4v-2h2V15zM6,11H4V9h2V11zM6,7H4V5h2V7z" +
+                "M10,19H8v-2h2V19zM10,15H8v-2h2V15zM10,11H8V9h2V11zM10,7H8V5h2V7z" +
+                "M20,19h-8v-2h2v-2h-2v-2h2v-2h-2V9h8V19z" +
+                "M18,11h-2v2h2V11zM18,15h-2v2h2V15z"
+        )
+    }
+
+    /** Material "expand_more" (flecha desplegable). */
+    val FlechaAbajo: ImageVector by lazy {
+        icono(
+            nombre = "FlechaAbajo",
+            trazo = "M16.59,8.59L12,13.17 7.41,8.59 6,10l6,6 6-6z"
+        )
+    }
+
+    /** Material "how_to_reg" (persona con palomita). */
+    val Registrar: ImageVector by lazy {
+        icono(
+            nombre = "Registrar",
+            trazo = "M9,17l3-2.94c-0.39-0.04-0.68-0.06-1-0.06-2.67,0-8,1.34-8,4v2h9l-3-3z" +
+                "M11,12c2.21,0 4-1.79 4-4s-1.79-4-4-4-4,1.79-4,4 1.79,4 4,4z" +
+                "M15.47,20.5L12,17l1.4-1.41 2.07,2.08 5.13-5.17 1.4,1.41z"
+        )
+    }
+
     // Los trazos de Material están diseñados para la regla NonZero.
     private fun icono(nombre: String, trazo: String): ImageVector =
         ImageVector.Builder(

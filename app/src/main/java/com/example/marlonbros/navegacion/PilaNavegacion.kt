@@ -33,6 +33,16 @@ class PilaNavegacion(inicial: List<Pantalla> = listOf(Pantalla.INICIO)) {
         return true
     }
 
+
+    fun volverA(pantalla: Pantalla) {
+        val indice = pantallas.lastIndexOf(pantalla)
+        if (indice == -1) {
+            ir(pantalla)
+        } else {
+            while (pantallas.lastIndex > indice) pantallas.removeAt(pantallas.lastIndex)
+        }
+    }
+
     companion object {
         /** Guarda la pila como nombres del enum para sobrevivir a rotaciones. */
         val Saver: Saver<PilaNavegacion, Any> = listSaver(

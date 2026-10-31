@@ -35,27 +35,49 @@ import com.example.marlonbros.ui.theme.FondoCampo
 import com.example.marlonbros.ui.theme.TextoClaro
 import com.example.marlonbros.ui.theme.TextoSecundario
 
-/** Campo con etiqueta monospace arriba, fondo oscuro e ícono a la izquierda. */
+internal val FormaCampo = RoundedCornerShape(6.dp)
+
+/** Etiqueta monospace de un campo, con ícono pequeño opcional a la izquierda. */
+@Composable
+fun EtiquetaCampo(texto: String, icono: ImageVector? = null) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        if (icono != null) {
+            Icon(
+                imageVector = icono,
+                contentDescription = null,
+                tint = TextoClaro.copy(alpha = 0.85f),
+                modifier = Modifier.size(16.dp)
+            )
+            Spacer(Modifier.width(8.dp))
+        }
+        Text(
+            text = texto,
+            color = TextoClaro.copy(alpha = 0.85f),
+            style = MaterialTheme.typography.labelMedium
+        )
+    }
+}
+
+/**
+ * Campo con etiqueta monospace arriba y fondo oscuro.
+ * [icono] se dibuja dentro del campo; [iconoEtiqueta] junto a la etiqueta.
+ */
 @Composable
 fun CampoNeon(
     etiqueta: String,
     valor: String,
     onValorChange: (String) -> Unit,
     marcador: String,
-    icono: ImageVector,
     modifier: Modifier = Modifier,
+    icono: ImageVector? = null,
+    iconoEtiqueta: ImageVector? = null,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     visualTransformation: VisualTransformation = VisualTransformation.None
 ) {
     var enfocado by remember { mutableStateOf(false) }
-    val forma = RoundedCornerShape(6.dp)
 
     Column(modifier = modifier.fillMaxWidth()) {
-        Text(
-            text = etiqueta,
-            color = TextoClaro.copy(alpha = 0.85f),
-            style = MaterialTheme.typography.labelMedium
-        )
+        EtiquetaCampo(etiqueta, iconoEtiqueta)
         Spacer(Modifier.height(10.dp))
         BasicTextField(
             value = valor,
@@ -73,22 +95,24 @@ fun CampoNeon(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(52.dp)
-                        .background(FondoCampo, forma)
+                        .background(FondoCampo, FormaCampo)
                         .border(
                             1.dp,
                             if (enfocado) Cian.copy(alpha = 0.6f) else Color.Transparent,
-                            forma
+                            FormaCampo
                         )
                         .padding(horizontal = 14.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Icon(
-                        imageVector = icono,
-                        contentDescription = null,
-                        tint = TextoClaro.copy(alpha = 0.8f),
-                        modifier = Modifier.size(22.dp)
-                    )
-                    Spacer(Modifier.width(10.dp))
+                    if (icono != null) {
+                        Icon(
+                            imageVector = icono,
+                            contentDescription = null,
+                            tint = TextoClaro.copy(alpha = 0.8f),
+                            modifier = Modifier.size(22.dp)
+                        )
+                        Spacer(Modifier.width(10.dp))
+                    }
                     Box(Modifier.weight(1f)) {
                         if (valor.isEmpty()) {
                             Text(

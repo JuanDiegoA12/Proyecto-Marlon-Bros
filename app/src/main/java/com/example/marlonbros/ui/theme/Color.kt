@@ -23,3 +23,6 @@ val FondoCampo = Color(0xFF111217)
 val TextoSecundario = Color(0xFF8A8D96)
 val VioletaIntenso = Color(0xFFA020F0)
 val TextoBotonDegradado = Color(0xFF0E5F6E)
+
+// Tomados de References/RegistroEmpleado.png
+val TextoBotonOscuro = Color(0xFF1B2140)

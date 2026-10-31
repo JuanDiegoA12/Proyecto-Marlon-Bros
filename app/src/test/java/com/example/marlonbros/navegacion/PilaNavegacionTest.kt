@@ -50,4 +50,28 @@ class PilaNavegacionTest {
     fun pilaVaciaNoSePermite() {
         PilaNavegacion(emptyList())
     }
+
+    @Test
+    fun volverAQuitaLoQueEstaEncima() {
+        val pila = PilaNavegacion()
+        pila.ir(Pantalla.INICIO_EMPLEADO)
+        pila.ir(Pantalla.REGISTRO_EMPLEADO)
+        pila.volverA(Pantalla.INICIO_EMPLEADO)
+        assertEquals(listOf(Pantalla.INICIO, Pantalla.INICIO_EMPLEADO), pila.historial)
+    }
+
+    @Test
+    fun volverAPantallaAusenteLaAbre() {
+        val pila = PilaNavegacion()
+        pila.volverA(Pantalla.INICIO_EMPLEADO)
+        assertEquals(listOf(Pantalla.INICIO, Pantalla.INICIO_EMPLEADO), pila.historial)
+    }
+
+    @Test
+    fun volverAPantallaActualNoCambiaNada() {
+        val pila = PilaNavegacion()
+        pila.ir(Pantalla.INICIO_EMPLEADO)
+        pila.volverA(Pantalla.INICIO_EMPLEADO)
+        assertEquals(listOf(Pantalla.INICIO, Pantalla.INICIO_EMPLEADO), pila.historial)
+    }
 }

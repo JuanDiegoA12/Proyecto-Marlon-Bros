@@ -84,11 +84,11 @@ class InicioEmpleadoScreenTest {
     }
 
     @Test
-    fun registrarseLlevaARegistroEmpleadoTemporal() {
+    fun registrarseLlevaARegistroEmpleado() {
         reglaCompose.setContent { MarlonBrosTheme { AppNavegacion() } }
 
         reglaCompose.onNodeWithText("Soy Empleado").performClick()
         reglaCompose.onNodeWithText("Registrarse").performClick()
-        reglaCompose.onNodeWithText("Registro Empleado", substring = true).assertIsDisplayed()
+        reglaCompose.onNodeWithText("Portal de Registro Interno").assertIsDisplayed()
     }
 }
