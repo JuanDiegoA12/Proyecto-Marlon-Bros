@@ -43,11 +43,13 @@ import com.example.marlonbros.ui.theme.FondoTarjeta
 import com.example.marlonbros.ui.theme.MarlonBrosTheme
 
 /**
- * Inicio de sesión de empleado (solo diseño, sin autenticación).
+ * Inicio de sesión compartido por empleado y cliente (solo diseño, sin autenticación).
+ * Solo cambia el [subtitulo] bajo "MARLON BROS".
  * [onConectar] y [onRegistrarse] los decide la navegación.
  */
 @Composable
-fun InicioEmpleadoScreen(
+fun InicioSesionScreen(
+    subtitulo: String,
     onConectar: () -> Unit = {},
     onRegistrarse: () -> Unit = {},
     onOlvideContrasena: () -> Unit = {}
@@ -69,7 +71,7 @@ fun InicioEmpleadoScreen(
             EncabezadoMarca(
                 tamanoLogo = 130.dp,
                 separacion = 32.dp,
-                subtitulo = "PRECISION IN MOTION",
+                subtitulo = subtitulo,
                 brilloLogo = true
             )
             Spacer(Modifier.height(36.dp))
@@ -131,8 +133,30 @@ fun InicioEmpleadoScreen(
     }
 }
 
+/** Inicio de sesión de empleado (References/inicioEmpleado.png). */
+@Composable
+fun InicioEmpleadoScreen(
+    onConectar: () -> Unit = {},
+    onRegistrarse: () -> Unit = {},
+    onOlvideContrasena: () -> Unit = {}
+) = InicioSesionScreen("PRECISION IN MOTION", onConectar, onRegistrarse, onOlvideContrasena)
+
+/** Inicio de sesión de cliente: mismo diseño, subtítulo "CLIENTE". */
+@Composable
+fun InicioClienteScreen(
+    onConectar: () -> Unit = {},
+    onRegistrarse: () -> Unit = {},
+    onOlvideContrasena: () -> Unit = {}
+) = InicioSesionScreen("CLIENTE", onConectar, onRegistrarse, onOlvideContrasena)
+
 @Preview(showSystemUi = true)
 @Composable
 private fun InicioEmpleadoScreenPreview() {
     MarlonBrosTheme { InicioEmpleadoScreen() }
+}
+
+@Preview(showSystemUi = true)
+@Composable
+private fun InicioClienteScreenPreview() {
+    MarlonBrosTheme { InicioClienteScreen() }
 }

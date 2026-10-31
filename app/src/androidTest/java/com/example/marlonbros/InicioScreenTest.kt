@@ -55,7 +55,7 @@ class InicioScreenTest {
         reglaCompose.setContent { MarlonBrosTheme { AppNavegacion() } }
 
         reglaCompose.onNodeWithText("Soy Cliente").performClick()
-        reglaCompose.onNodeWithText("Registro Cliente", substring = true).assertIsDisplayed()
+        reglaCompose.onNodeWithText("CLIENTE").assertIsDisplayed()
 
         Espresso.pressBack()
         reglaCompose.onNodeWithText("MARLON BROS").assertIsDisplayed()

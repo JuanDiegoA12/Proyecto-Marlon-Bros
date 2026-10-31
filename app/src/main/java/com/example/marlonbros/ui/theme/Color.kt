@@ -26,3 +26,9 @@ val TextoBotonDegradado = Color(0xFF0E5F6E)
 
 // Tomados de References/RegistroEmpleado.png
 val TextoBotonOscuro = Color(0xFF1B2140)
+
+// Tomados de References/RegistroCliente.png
+val FondoCampoClaro = Color(0xFFF4F5F7)
+val TextoCampoClaro = Color(0xFF1A1C23)
+val IconoCampoClaro = Color(0xFF3A3D46)
+val AroGris = Color(0xFF3A3D46)

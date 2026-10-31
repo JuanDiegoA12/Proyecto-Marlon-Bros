@@ -15,11 +15,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.dropShadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.graphics.shadow.Shadow as SombraForma
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.marlonbros.R
@@ -38,7 +40,8 @@ fun EncabezadoMarca(
     subtitulo: String? = null,
     estiloSubtitulo: TextStyle = MaterialTheme.typography.labelLarge,
     brilloLogo: Boolean = false,
-    logoCircular: Boolean = false
+    logoCircular: Boolean = false,
+    colorAro: Color = Cian
 ) {
     Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
         val forma = if (logoCircular) CircleShape else RoundedCornerShape(4.dp)
@@ -52,7 +55,7 @@ fun EncabezadoMarca(
         if (logoCircular) {
             logoModifier = logoModifier
                 .clip(forma)
-                .border(3.dp, Cian, forma)
+                .border(3.dp, colorAro, forma)
         }
         Image(
             painter = painterResource(R.drawable.logo),
@@ -75,7 +78,8 @@ fun EncabezadoMarca(
             Text(
                 text = subtitulo,
                 color = TextoClaro.copy(alpha = 0.85f),
-                style = estiloSubtitulo
+                style = estiloSubtitulo,
+                textAlign = TextAlign.Center
             )
         }
     }

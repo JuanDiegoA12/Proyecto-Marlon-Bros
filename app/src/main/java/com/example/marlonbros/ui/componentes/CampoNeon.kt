@@ -18,6 +18,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -29,13 +30,47 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.marlonbros.ui.theme.Cian
 import com.example.marlonbros.ui.theme.FondoCampo
+import com.example.marlonbros.ui.theme.FondoCampoClaro
+import com.example.marlonbros.ui.theme.IconoCampoClaro
+import com.example.marlonbros.ui.theme.TextoCampoClaro
 import com.example.marlonbros.ui.theme.TextoClaro
 import com.example.marlonbros.ui.theme.TextoSecundario
 
 internal val FormaCampo = RoundedCornerShape(6.dp)
+
+/** Colores del interior de un campo. */
+@Immutable
+data class ColoresCampo(
+    val fondo: Color,
+    val texto: Color,
+    val marcador: Color,
+    val icono: Color,
+    val bordeEnfocado: Color
+) {
+    companion object {
+        /** Campo oscuro (Inicio de sesión y Registro Empleado). */
+        val Oscuro = ColoresCampo(
+            fondo = FondoCampo,
+            texto = TextoClaro,
+            marcador = TextoSecundario,
+            icono = TextoClaro.copy(alpha = 0.8f),
+            bordeEnfocado = Cian.copy(alpha = 0.6f)
+        )
+
+        /** Campo claro (Registro Cliente). */
+        val Claro = ColoresCampo(
+            fondo = FondoCampoClaro,
+            texto = TextoCampoClaro,
+            marcador = TextoSecundario,
+            icono = IconoCampoClaro,
+            bordeEnfocado = Cian
+        )
+    }
+}
 
 /** Etiqueta monospace de un campo, con ícono pequeño opcional a la izquierda. */
 @Composable
@@ -59,8 +94,9 @@ fun EtiquetaCampo(texto: String, icono: ImageVector? = null) {
 }
 
 /**
- * Campo con etiqueta monospace arriba y fondo oscuro.
- * [icono] se dibuja dentro del campo; [iconoEtiqueta] junto a la etiqueta.
+ * Campo con etiqueta monospace arriba.
+ * [icono] se dibuja dentro del campo; [iconoEtiqueta] junto a la etiqueta;
+ * [accionFinal] va pegado a la derecha (por ejemplo, el ojo para mostrar la contraseña).
  */
 @Composable
 fun CampoNeon(
@@ -71,8 +107,11 @@ fun CampoNeon(
     modifier: Modifier = Modifier,
     icono: ImageVector? = null,
     iconoEtiqueta: ImageVector? = null,
+    colores: ColoresCampo = ColoresCampo.Oscuro,
+    altura: Dp = 52.dp,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    visualTransformation: VisualTransformation = VisualTransformation.None
+    visualTransformation: VisualTransformation = VisualTransformation.None,
+    accionFinal: (@Composable () -> Unit)? = null
 ) {
     var enfocado by remember { mutableStateOf(false) }
 
@@ -83,7 +122,7 @@ fun CampoNeon(
             value = valor,
             onValueChange = onValorChange,
             singleLine = true,
-            textStyle = MaterialTheme.typography.bodyLarge.copy(color = TextoClaro),
+            textStyle = MaterialTheme.typography.bodyLarge.copy(color = colores.texto),
             cursorBrush = SolidColor(Cian),
             keyboardOptions = keyboardOptions,
             visualTransformation = visualTransformation,
@@ -94,21 +133,21 @@ fun CampoNeon(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(52.dp)
-                        .background(FondoCampo, FormaCampo)
+                        .height(altura)
+                        .background(colores.fondo, FormaCampo)
                         .border(
                             1.dp,
-                            if (enfocado) Cian.copy(alpha = 0.6f) else Color.Transparent,
+                            if (enfocado) colores.bordeEnfocado else Color.Transparent,
                             FormaCampo
                         )
-                        .padding(horizontal = 14.dp),
+                        .padding(start = 14.dp, end = if (accionFinal != null) 4.dp else 14.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     if (icono != null) {
                         Icon(
                             imageVector = icono,
                             contentDescription = null,
-                            tint = TextoClaro.copy(alpha = 0.8f),
+                            tint = colores.icono,
                             modifier = Modifier.size(22.dp)
                         )
                         Spacer(Modifier.width(10.dp))
@@ -117,12 +156,13 @@ fun CampoNeon(
                         if (valor.isEmpty()) {
                             Text(
                                 text = marcador,
-                                color = TextoSecundario,
+                                color = colores.marcador,
                                 style = MaterialTheme.typography.bodyLarge
                             )
                         }
                         campo()
                     }
+                    accionFinal?.invoke()
                 }
             }
         )

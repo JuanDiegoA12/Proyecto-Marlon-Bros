@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.marlonbros.ui.iconos.IconosMarlon
@@ -42,7 +43,9 @@ fun BotonDegradado(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     icono: ImageVector? = null,
-    colorTexto: Color = TextoBotonDegradado
+    colorTexto: Color = TextoBotonDegradado,
+    pesoTexto: FontWeight = FontWeight.ExtraBold,
+    espaciadoLetras: TextUnit = if (icono == null) 1.sp else 0.sp
 ) {
     val forma = RoundedCornerShape(10.dp)
     val degradado = Brush.horizontalGradient(listOf(Cian, VioletaIntenso))
@@ -71,9 +74,9 @@ fun BotonDegradado(
             text = texto,
             color = colorTexto,
             style = MaterialTheme.typography.titleLarge.copy(
-                fontWeight = FontWeight.ExtraBold,
+                fontWeight = pesoTexto,
                 fontSize = 24.sp,
-                letterSpacing = if (icono == null) 1.sp else 0.sp
+                letterSpacing = espaciadoLetras
             )
         )
     }
