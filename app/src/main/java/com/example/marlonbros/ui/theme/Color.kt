@@ -14,3 +14,12 @@ val Lila = Color(0xFFE1A6F0)
 
 val RellenoBoton = Color(0xFF1C1E26)
 val TextoClaro = Color(0xFFE6E6EA)
+
+// Tomados de References/inicioEmpleado.png
+val FondoTarjeta = Color(0xFF1A1C23)
+val BordeTarjeta = Color(0xFF2A2D36)
+val FondoPestanaActiva = Color(0xFF15171D)
+val FondoCampo = Color(0xFF111217)
+val TextoSecundario = Color(0xFF8A8D96)
+val VioletaIntenso = Color(0xFFA020F0)
+val TextoBotonDegradado = Color(0xFF0E5F6E)

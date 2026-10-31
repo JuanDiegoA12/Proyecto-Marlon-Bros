@@ -33,6 +33,30 @@ object IconosMarlon {
         )
     }
 
+    /** Material "mail_outline" (correo). */
+    val Correo: ImageVector by lazy {
+        icono(
+            nombre = "Correo",
+            trazo = "M20,4H4c-1.1,0-1.99,0.9-1.99,2L2,18c0,1.1 0.9,2 2,2h16c1.1,0 2-0.9 2-2V6" +
+                "c0-1.1-0.9-2-2-2z" +
+                "M20,18H4V8l8,5 8-5v10z" +
+                "M12,11L4,6h16l-8,5z"
+        )
+    }
+
+    /** Material "lock_outline" (candado). */
+    val Candado: ImageVector by lazy {
+        icono(
+            nombre = "Candado",
+            trazo = "M12,17c1.1,0 2-0.9 2-2s-0.9-2-2-2-2,0.9-2,2 0.9,2 2,2z" +
+                "M18,8h-1V6c0-2.76-2.24-5-5-5S7,3.24 7,6v2H6c-1.1,0-2,0.9-2,2v10" +
+                "c0,1.1 0.9,2 2,2h12c1.1,0 2-0.9 2-2V10c0-1.1-0.9-2-2-2z" +
+                "M8.9,6c0-1.71 1.39-3.1 3.1-3.1s3.1,1.39 3.1,3.1v2H8.9V6z" +
+                "M18,20H6V10h12v10z"
+        )
+    }
+
+    // Los trazos de Material están diseñados para la regla NonZero.
     private fun icono(nombre: String, trazo: String): ImageVector =
         ImageVector.Builder(
             name = nombre,
@@ -42,7 +66,7 @@ object IconosMarlon {
             viewportHeight = 24f
         ).addPath(
             pathData = addPathNodes(trazo),
-            pathFillType = PathFillType.EvenOdd,
+            pathFillType = PathFillType.NonZero,
             fill = SolidColor(Color.Black)
         ).build()
 }

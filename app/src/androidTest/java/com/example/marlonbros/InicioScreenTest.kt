@@ -66,6 +66,6 @@ class InicioScreenTest {
         reglaCompose.setContent { MarlonBrosTheme { AppNavegacion() } }
 
         reglaCompose.onNodeWithText("Soy Empleado").performClick()
-        reglaCompose.onNodeWithText("Inicio Empleado", substring = true).assertIsDisplayed()
+        reglaCompose.onNodeWithText("CONECTAR").assertIsDisplayed()
     }
 }
